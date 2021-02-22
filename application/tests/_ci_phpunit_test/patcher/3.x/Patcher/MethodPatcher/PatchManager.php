@@ -69,7 +69,7 @@ class PatchManager
 			$log_args = function () use ($params) {
 				$output = '';
 				foreach ($params as $arg) {
-					$output .= var_export($arg, true) . ', ';
+					$output .= json_encode($arg) . ', ';
 				}
 				$output = rtrim($output, ', ');
 				return $output;
