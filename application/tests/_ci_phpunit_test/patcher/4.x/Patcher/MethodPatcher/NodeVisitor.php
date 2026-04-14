@@ -24,7 +24,7 @@ class NodeVisitor extends NodeVisitorAbstract
 			return;
 		}
 
-		$parser = (new ParserFactory())->create(ParserFactory::PREFER_PHP7);
+		$parser = (new ParserFactory())->createForNewestSupportedVersion();
 
 		if ($node->returnType !== null) {
 			if (isset($node->returnType->name) && $node->returnType->name === 'void') {
