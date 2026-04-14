@@ -51,14 +51,14 @@ function reset_instance()
 		}
 	}
 
+	$CFG =& load_class('Config', 'core');
+	CIPHPUnitTestSuperGlobal::set_Global('CFG', $CFG);
 	// Load core classes
 	$BM =& load_class('Benchmark', 'core');
 	CIPHPUnitTestSuperGlobal::set_Global('BM', $BM);
-	$EXT =& load_class('Hooks', 'core');
+	$EXT =& load_class('Hooks', 'core', $CFG);
 	CIPHPUnitTestSuperGlobal::set_Global('EXT', $EXT);
 
-	$CFG =& load_class('Config', 'core');
-	CIPHPUnitTestSuperGlobal::set_Global('CFG', $CFG);
 	// Do we have any manually set config items in the index.php file?
 	global $assign_to_config;
 	if (isset($assign_to_config) && is_array($assign_to_config))
@@ -69,17 +69,18 @@ function reset_instance()
 		}
 	}
 
-	$UNI =& load_class('URI', 'core');
+	$UNI =& load_class('URI', 'core', $CFG);
 	CIPHPUnitTestSuperGlobal::set_Global('UNI', $UNI);
-//	$URI =& load_class('Utf8', 'core');
-//	CIPHPUnitTestSuperGlobal::set_Global('URI', $URI);
+	$URI =& load_class('Utf8', 'core');
+	CIPHPUnitTestSuperGlobal::set_Global('URI', $URI);
 	$RTR =& load_class('Router', 'core');
 	CIPHPUnitTestSuperGlobal::set_Global('RTR', $RTR);
 	$OUT =& load_class('Output', 'core');
 	CIPHPUnitTestSuperGlobal::set_Global('OUT', $OUT);
-	$SEC =& load_class('Security', 'core');
+	$charset = strtoupper(config_item('charset'));
+	$SEC =& load_class('Security', 'core', $charset);
 	CIPHPUnitTestSuperGlobal::set_Global('SEC', $SEC);
-	$IN =& load_class('Input', 'core');
+	$IN =& load_class('Input', 'core', $SEC);
 	CIPHPUnitTestSuperGlobal::set_Global('IN', $IN);
 	$LANG =& load_class('Lang', 'core');
 	CIPHPUnitTestSuperGlobal::set_Global('LANG', $LANG);
