@@ -26,13 +26,7 @@ abstract class AbstractPatcher
 	{
 		$patched = false;
 
-		$parser = (new ParserFactory())
-			->create(
-				MonkeyPatchManager::getPhpParser(),
-				new Lexer(
-					['usedAttributes' => ['startTokenPos', 'endTokenPos']]
-				)
-			);
+		$parser= new ParserFactory()->createForHostVersion();
 		$traverser = new NodeTraverser();
 		$traverser->addVisitor($this->node_visitor);
 

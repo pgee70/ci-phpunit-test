@@ -18,9 +18,6 @@ use Kenjis\MonkeyPatch\Patcher\FunctionPatcher;
 class MonkeyPatchManager
 {
 	public static $debug = false;
-
-	private static $php_parser = ParserFactory::PREFER_PHP5;
-
 	/**
 	 * The path to the log file if `$debug` is true.
 	 * Will be set in {@link MonkeyPatchManager::setDebug}.
@@ -62,11 +59,6 @@ class MonkeyPatchManager
 	public static function getExitExceptionClassname()
 	{
 		return self::$exit_exception_classname;
-	}
-
-	public static function getPhpParser()
-	{
-		return self::$php_parser;
 	}
 
 	protected static function setDebug(array $config)
@@ -121,12 +113,6 @@ class MonkeyPatchManager
 	public static function init(array $config)
 	{
 		self::setDebug($config);
-
-		if (isset($config['php_parser']))
-		{
-			self::$php_parser = constant('PhpParser\ParserFactory::'.$config['php_parser']);
-		}
-
 		self::setDir($config);
 		self::setPaths($config);
 
