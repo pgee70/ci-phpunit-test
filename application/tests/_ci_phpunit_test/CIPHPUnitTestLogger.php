@@ -19,15 +19,12 @@ class CIPHPUnitTestLogger
 	{
 	}
 
-//	/**
-//	 * @return array
-//	 */
-//	public static function getLogs()
-//	{
-//		return self::$logs;
-//	}
+	public static function getLogs():array
+	{
+		return self::$logs;
+	}
 
-	public static function resetLogs()
+	public static function resetLogs():void
 	{
 		self::$logs = [];
 	}
@@ -36,7 +33,7 @@ class CIPHPUnitTestLogger
 	 * @param string $level
 	 * @param string $message
 	 */
-	public static function log($level, $message)
+	public static function log($level, $message):void
 	{
 		$trace = debug_backtrace();
 		$file  = null;
@@ -60,17 +57,33 @@ class CIPHPUnitTestLogger
 	/**
 	 * @param string $level
 	 * @param string $message
+	 * @return bool
+	 */
+	public static function didLogsContain(string $level, string $message):bool
+	{
+		foreach (self::$logs as $log) {
+			if (strtolower($log['level']) === strtolower($level) && str_contains($log['message'],$message)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+
+	/**
+	 * @param string $level
+	 * @param string $message
 	 *
 	 * @return bool
 	 */
-	public static function didLog($level, $message)
+	public static function didLog(string $level, string $message):bool
 	{
 		foreach (self::$logs as $log) {
 			if (strtolower($log['level']) === strtolower($level) && $message === $log['message']) {
 				return true;
 			}
 		}
-
 		return false;
 	}
 

@@ -26,7 +26,7 @@ class CIPHPUnitTest
 	 *
 	 * @codeCoverageIgnore
 	 */
-	public static function init(array $autoload_dirs = null)
+	public static function init(?array $autoload_dirs = null)
 	{
 		self::defineConstants();
 

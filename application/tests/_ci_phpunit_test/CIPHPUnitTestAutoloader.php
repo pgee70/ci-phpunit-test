@@ -26,29 +26,18 @@ class CIPHPUnitTestAutoloader
 	private $cache;
 
 	/**
-	 * @param CIPHPUnitTestFileCache $cache
-	 * @param array $dirs directories to search file
+	 * @param ?CIPHPUnitTestFileCache $cache
+	 * @param ?array                  $dirs directories to search file
 	 */
-	public function __construct(
-		CIPHPUnitTestFileCache $cache = null,
-		array $dirs = null
-	)
-	{
+	public function __construct(?CIPHPUnitTestFileCache $cache = NULL, ?array $dirs = NULL) {
 		$this->cache = $cache;
-		if ($dirs === null)
-		{
-			$this->dirs = [
-				APPPATH.'models',
-				APPPATH.'libraries',
-				APPPATH.'controllers',
-				APPPATH.'modules',
-				APPPATH.'hooks',
-			];
-		}
-		else
-		{
-			$this->dirs = $dirs;
-		}
+		$this->dirs  = $dirs === NULL ? [
+			APPPATH . 'models',
+			APPPATH . 'libraries',
+			APPPATH . 'controllers',
+			APPPATH . 'modules',
+			APPPATH . 'hooks',
+		] : $dirs;
 	}
 
 	public function load($class)
@@ -140,7 +129,7 @@ class CIPHPUnitTestAutoloader
 			}
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -158,7 +147,7 @@ class CIPHPUnitTestAutoloader
 				unset($this->cache[$class]);
 			}
 		}
-		
+
 		return false;
 	}
 }

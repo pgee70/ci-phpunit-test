@@ -283,7 +283,8 @@ class CI_Loader {
 		$CI =& get_instance();
 		if (isset($CI->$name))
 		{
-			throw new RuntimeException('The model name you are loading is the name of a resource that is already being used: '.$name);
+			log_message('debug', "Model '$name' has already been initialized");
+			return $this;
 		}
 
 		if ($db_conn !== FALSE && ! class_exists('CI_DB', FALSE))

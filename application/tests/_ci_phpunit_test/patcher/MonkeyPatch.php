@@ -18,7 +18,7 @@ class MonkeyPatch
 {
 	/**
 	 * Patch on function
-	 * 
+	 *
 	 * @param string $function     function name
 	 * @param mixed  $return_value return value
 	 * @param string $class_name   class::method to apply this patch
@@ -38,7 +38,7 @@ class MonkeyPatch
 
 	/**
      * Patch on constant
-     * 
+     *
      * @param string $constant
      * @param mixed $value
      * @param string $class_method
@@ -58,7 +58,7 @@ class MonkeyPatch
 
 	/**
 	 * Patch on class method
-	 * 
+	 *
 	 * @param string $class
 	 * @param array $params [method_name => return_value]
 	 */
@@ -93,7 +93,7 @@ class MonkeyPatch
 	 * @param array $params        parameters
 	 */
 	public static function verifyInvokedMultipleTimes(
-		$class_method, $times, array $params = null
+		$class_method, $times, ?array $params = null
 	)
 	{
 		$classname = self::getClassname($class_method);
@@ -106,7 +106,7 @@ class MonkeyPatch
 	 * @param string $class_method class::method or function name
 	 * @param array $params        parameters
 	 */
-	public static function verifyInvoked($class_method, array $params = null)
+	public static function verifyInvoked($class_method, ?array $params = null)
 	{
 		$classname = self::getClassname($class_method);
 		$classname::setExpectedInvocations(
@@ -118,7 +118,7 @@ class MonkeyPatch
 	 * @param string $class_method class::method or function name
 	 * @param array $params        parameters
 	 */
-	public static function verifyInvokedOnce($class_method, array $params = null)
+	public static function verifyInvokedOnce($class_method, ?array $params = null)
 	{
 		$classname = self::getClassname($class_method);
 		$classname::setExpectedInvocations(
@@ -130,7 +130,7 @@ class MonkeyPatch
 	 * @param string $class_method class::method or function name
 	 * @param array $params        parameters
 	 */
-	public static function verifyNeverInvoked($class_method, array $params = null)
+	public static function verifyNeverInvoked($class_method, ?array $params = null)
 	{
 		$classname = self::getClassname($class_method);
 		$classname::setExpectedInvocations(
